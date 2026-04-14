@@ -1,6 +1,4 @@
 import React from "react";
-import CustomCursor from "@/components/CustomCursor";
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ScrollyCanvas from "@/components/ScrollyCanvas";
 import Overlay from "@/components/Overlay";
@@ -14,14 +12,11 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <main className="bg-[#08080F] min-h-screen text-gray-200 selection:bg-[#5B8DEF]/30 selection:text-white overflow-x-hidden">
-      <CustomCursor />
-      <Navbar />
 
       <Hero />
 
       {/* Scrollytelling Section */}
       <ScrollyCanvas>
-        {/* @ts-expect-error scrollYProgress implicitly passed down by ScrollyCanvas cloneElement */}
         <Overlay />
       </ScrollyCanvas>
 

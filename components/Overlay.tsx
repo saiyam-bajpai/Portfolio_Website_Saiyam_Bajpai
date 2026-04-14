@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, MotionValue, useTransform } from "framer-motion";
+import { motion, MotionValue, useTransform, useMotionValue } from "framer-motion";
 
 interface OverlayProps {
   scrollYProgress?: MotionValue<number>;
@@ -19,7 +19,11 @@ const Letter = ({ char, index, total, scrollYProgress }: { char: string; index: 
   );
 };
 
-export default function Overlay({ scrollYProgress }: OverlayProps) {
+export default function Overlay({ scrollYProgress: externalProgress }: OverlayProps) {
+  // Fallback motion value so hooks are always called with a valid MotionValue
+  const fallback = useMotionValue(0);
+  const scrollYProgress = externalProgress ?? fallback;
+
   // Section 1: "Saiyam Bajpai." (0% - 18%)
   const s1Text = "Saiyam Bajpai.";
   const s1Opacity = useTransform(scrollYProgress, [0, 0.08, 0.18], [0, 1, 0]);
@@ -77,7 +81,7 @@ export default function Overlay({ scrollYProgress }: OverlayProps) {
         className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center"
       >
         <h2 className="font-syne text-5xl md:text-7xl text-[#E8823A] font-bold drop-shadow-md">
-          Let's see what's possible.
+          Let&apos;s see what&apos;s possible.
         </h2>
       </motion.div>
     </div>

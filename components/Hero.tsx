@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, FileText } from "lucide-react";
 
 // Inline Aceternity Spotlight
@@ -92,6 +92,7 @@ const Typewriter = ({ words }: { words: string[] }) => {
 };
 
 export default function Hero() {
+  const basePath = process.env.__NEXT_ROUTER_BASEPATH || "";
   const typewriterWords = [
     "Python learner",
     "CV explorer",
@@ -116,7 +117,7 @@ export default function Hero() {
         >
           <div className="space-y-4">
             <h1 className="font-syne text-6xl md:text-7xl font-bold leading-tight tracking-tight text-white">
-              I'm Saiyam — <br />
+              I&apos;m Saiyam — <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-400">
                 a student who builds.
               </span>
@@ -204,12 +205,12 @@ export default function Hero() {
             className="relative z-10 rounded-2xl overflow-hidden border border-white/5 bg-white/5 backdrop-blur-sm aspect-[4/5]"
           >
             <img 
-              src="/portrait.jpg" 
+              src={`${basePath}/portrait.jpg`} 
               alt="Saiyam Bajpai Portrait" 
               className="w-full h-full object-cover"
               onError={(e) => {
                 // simple fallback if image isn't dropped yet
-                (e.currentTarget as HTMLImageElement).src = "https://placehold.co/800x1000/1a1a24/F0F0F5?text=Place+/public/portrait.jpg+here";
+                (e.currentTarget as HTMLImageElement).src = `https://placehold.co/800x1000/1a1a24/F0F0F5?text=Place+portrait.jpg+in+public`;
               }}
             />
 

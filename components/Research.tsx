@@ -110,10 +110,10 @@ export default function Research() {
           className="space-y-6 max-w-2xl mx-auto mb-12"
         >
           <h3 className="text-2xl md:text-3xl font-syne font-semibold text-gray-200">
-            I haven't published anything yet.
+            I haven&apos;t published anything yet.
           </h3>
           <p className="text-lg text-gray-400 leading-relaxed font-sans">
-            But I'm drawn to the intersection of human-computer interaction, 
+            But I&apos;m drawn to the intersection of human-computer interaction, 
             computer vision, and intelligent systems.
           </p>
           <p className="text-base text-gray-500 italic">
@@ -168,7 +168,7 @@ export default function Research() {
 
         {/* Bottom Note */}
         <p className="text-sm text-gray-500 italic max-w-sm">
-          If you're a researcher and want to collaborate → reach out below.
+          If you&apos;re a researcher and want to collaborate → reach out below.
         </p>
 
       </div>

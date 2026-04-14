@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CircleDot, Cpu, Layout, Server, Database, Code, Globe, PenTool, BrainCircuit, ScanSearch, FileDigit, BarChart3, Binary, Container, GitBranch, Cloud } from "lucide-react";
+import { CircleDot, Cpu, Layout, ScanSearch, BrainCircuit, FileDigit, BarChart3, Binary } from "lucide-react";
 
 // Helper for circular progress
 const CircularProgress = ({ percentage, color, label, skill }: { percentage: number, color: string, label: string, skill: string }) => {
@@ -61,10 +61,10 @@ export default function Skills() {
         <div className="mb-12">
           <h3 className="text-sm text-gray-500 uppercase tracking-[0.2em] font-semibold mb-4">Skills</h3>
           <h2 className="text-4xl md:text-5xl font-syne font-bold text-white tracking-tight mb-3">
-            What I'm Learning
+            What I&apos;m Learning
           </h2>
           <p className="text-sm text-gray-400 italic">
-            These aren't mastered skills — they're active explorations.
+            These aren&apos;t mastered skills — they&apos;re active explorations.
           </p>
         </div>
 

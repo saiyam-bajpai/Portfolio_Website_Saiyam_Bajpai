@@ -88,7 +88,7 @@ export default function ResumeView() {
               </div>
             </div>
             <div className="text-sm text-gray-700 leading-relaxed pl-3 border-l-2 border-transparent">
-              <p className="relative pl-3 mb-1"><span className="absolute left-0 text-gray-400">•</span>Built a real-time hand gesture recognition system using MediaPipe's ML pipeline to control OS-level functions — brightness, volume, and scroll — without any hardware peripherals.</p>
+              <p className="relative pl-3 mb-1"><span className="absolute left-0 text-gray-400">•</span>Built a real-time hand gesture recognition system using MediaPipe&apos;s ML pipeline to control OS-level functions — brightness, volume, and scroll — without any hardware peripherals.</p>
               <p className="relative pl-3 mb-1"><span className="absolute left-0 text-gray-400">•</span>Demonstrates applied computer vision and human-computer interaction using on-device ML inference, a core building block for multimodal AI interfaces.</p>
               <p className="relative pl-3 mb-1"><span className="absolute left-0 text-gray-400">•</span>Shipped a web-accessible version in March 2026; maintained clean, documented code via GitHub with version-controlled iterative development.</p>
               <p className="relative pl-3"><span className="absolute left-0 text-gray-400">•</span>Key learning: productionising ML models for real-time, low-latency applications on edge hardware.</p>

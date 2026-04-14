@@ -59,10 +59,10 @@ export default function About() {
             className="flex flex-col space-y-8"
           >
             <p className="text-lg md:text-xl text-gray-400 font-sans leading-relaxed">
-              I'm in my first year, pursuing two degrees at once — a BS in Data Science 
-              from IIT Madras and a BTech in CS & Design from MITS Gwalior. I'm not an 
-              expert. I'm at the very start of a long road, and I've decided to build my 
-              way through it. Every project I ship teaches me something a classroom can't.
+              I&apos;m in my first year, pursuing two degrees at once — a BS in Data Science 
+              from IIT Madras and a BTech in CS &amp; Design from MITS Gwalior. I&apos;m not an 
+              expert. I&apos;m at the very start of a long road, and I&apos;ve decided to build my 
+              way through it. Every project I ship teaches me something a classroom can&apos;t.
             </p>
 
             {/* Currently Learning Pill */}

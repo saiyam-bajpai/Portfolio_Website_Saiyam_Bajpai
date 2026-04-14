@@ -13,7 +13,7 @@ export default function Projects() {
         <div className="mb-16">
           <h3 className="text-sm text-gray-500 uppercase tracking-[0.2em] font-semibold mb-4">Projects</h3>
           <h2 className="text-4xl md:text-5xl font-syne font-bold text-white tracking-tight mb-3">
-            Things I've Built
+            Things I&apos;ve Built
           </h2>
           <p className="text-sm text-gray-400 italic">
             Real projects. Real code. Still learning.
@@ -44,7 +44,7 @@ export default function Projects() {
             <p className="text-gray-400 font-sans leading-relaxed mb-8 flex-grow">
               A real-time hand gesture recognition system that controls OS-level
               functions — volume, brightness, scroll — using only a webcam. Built with
-              MediaPipe's ML pipeline and OpenCV. My first real dive into on-device
+              MediaPipe&apos;s ML pipeline and OpenCV. My first real dive into on-device
               ML inference and computer vision.
             </p>
 

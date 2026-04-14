@@ -1,10 +1,14 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { useScroll, useTransform, useMotionValueEvent, MotionValue } from "framer-motion";
 
 interface ScrollyCanvasProps {
   children?: React.ReactNode;
+}
+
+interface OverlayChildProps {
+  scrollYProgress?: MotionValue<number>;
 }
 
 export default function ScrollyCanvas({ children }: ScrollyCanvasProps) {
@@ -26,14 +30,14 @@ export default function ScrollyCanvas({ children }: ScrollyCanvasProps) {
     const totalFrames = 144;
     const imgArray: HTMLImageElement[] = [];
 
+    const basePath = process.env.__NEXT_ROUTER_BASEPATH || "";
+
     const loadImages = async () => {
       for (let i = 0; i < totalFrames; i++) {
         const img = new window.Image();
         const frameNumber = String(i).padStart(3, "0");
-        img.src = `/Saiyam_Bajpai_Portfolio/ezgif-split/frame_${frameNumber}_delay-0.056s.webp`;
-        // if user drops directly in /public/ezgif-split, prefix /ezgif-split. 
-        // Following strictly instruction: /Saiyam_Bajpai_Portfolio/
-        
+        img.src = `${basePath}/ezgif-split/frame_${frameNumber}_delay-0.056s.webp`;
+
         img.onload = () => {
           loadedCount++;
           if (loadedCount === totalFrames) {
@@ -42,14 +46,13 @@ export default function ScrollyCanvas({ children }: ScrollyCanvasProps) {
           }
         };
         img.onerror = () => {
-          // fallback if directory root was meant to be purely Next public root /ezgif-split
-          // Trying fallback silently without breaking loop heavily:
-          if (!img.src.includes("/Saiyam_Bajpai_Portfolio/")) return;
-          const fallbackImg = new window.Image();
-          fallbackImg.src = `/ezgif-split/frame_${frameNumber}_delay-0.056s.webp`;
-          fallbackImg.onload = () => { loadedCount++; if(loadedCount===totalFrames){ setIsLoaded(true); setImages(imgArray); } };
-          imgArray[i] = fallbackImg;
-        }
+          // Count error as loaded to avoid infinite loading
+          loadedCount++;
+          if (loadedCount === totalFrames) {
+            setIsLoaded(true);
+            setImages(imgArray);
+          }
+        };
         imgArray.push(img);
       }
     };
@@ -65,6 +68,7 @@ export default function ScrollyCanvas({ children }: ScrollyCanvasProps) {
     if (!ctx) return;
 
     const img = images[index];
+    if (!img.naturalWidth) return; // Not yet loaded
     const canvasW = canvas.width;
     const canvasH = canvas.height;
     
@@ -103,7 +107,8 @@ export default function ScrollyCanvas({ children }: ScrollyCanvasProps) {
     handleResize(); // init
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [isLoaded]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoaded, images]);
 
   return (
     <div ref={containerRef} className="relative h-[500vh] bg-[#08080F]">
@@ -121,8 +126,8 @@ export default function ScrollyCanvas({ children }: ScrollyCanvasProps) {
         {/* Pass down scroll progress to children (like Overlay) */}
         <div className="absolute inset-0 z-10">
           {React.Children.map(children, (child) => {
-            if (React.isValidElement(child)) {
-              return React.cloneElement(child, { scrollYProgress });
+            if (React.isValidElement<OverlayChildProps>(child)) {
+              return React.cloneElement(child, { scrollYProgress } as OverlayChildProps);
             }
             return child;
           })}

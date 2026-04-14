@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import CustomCursor from "@/components/CustomCursor";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://saiyambajpai.dev'),
   title: 'Saiyam Bajpai — CS & Data Science Student | Builder',
   description: 'Saiyam Bajpai — Dual-degree student at IIT Madras and MITS Gwalior building AI-first products. Exploring computer vision, data science, full-stack development, and research. Portfolio of real projects.',
   keywords: [

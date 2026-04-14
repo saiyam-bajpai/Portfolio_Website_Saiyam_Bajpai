@@ -22,7 +22,7 @@ export default function Contact() {
         <div className="mb-16">
           <h3 className="text-sm text-gray-500 uppercase tracking-[0.2em] font-semibold mb-4">Contact</h3>
           <h2 className="text-4xl md:text-5xl font-syne font-bold text-white tracking-tight mb-4">
-            Let's connect.
+            Let&apos;s connect.
           </h2>
           <p className="text-gray-400 font-sans max-w-lg mx-auto">
             Always open to interesting conversations — about projects, ideas,

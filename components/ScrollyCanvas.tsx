@@ -122,8 +122,8 @@ export default function ScrollyCanvas({ children }: ScrollyCanvasProps) {
   }, [isLoaded]);
 
   return (
-    <div ref={containerRef} className="relative h-[800vh] bg-[#08080F]">
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+    <div ref={containerRef} className="relative h-[800vh] bg-[#08080F] z-0">
+      <div className="sticky top-0 left-0 h-screen w-full overflow-hidden z-10">
         {!isLoaded && (
           <div className="absolute inset-0 flex items-center justify-center z-50 bg-[#08080F]">
              <div className="flex flex-col items-center space-y-4">

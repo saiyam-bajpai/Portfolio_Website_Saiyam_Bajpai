@@ -22,7 +22,7 @@ export default function ScrollyCanvas({ children }: ScrollyCanvasProps) {
     offset: ["start start", "end end"]
   });
 
-  const currentFrame = useTransform(scrollYProgress, [0, 1], [0, 143]);
+  const currentFrame = useTransform(scrollYProgress, [0, 1], [0, 143], { clamp: true });
 
   // Preload images
   useEffect(() => {
@@ -106,10 +106,11 @@ export default function ScrollyCanvas({ children }: ScrollyCanvasProps) {
     handleResize(); 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded]);
 
   return (
-    <div ref={containerRef} className="relative h-[500vh] bg-[#08080F]">
+    <div ref={containerRef} className="relative h-[800vh] bg-[#08080F]">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {!isLoaded && (
           <div className="absolute inset-0 flex items-center justify-center z-50 bg-[#08080F]">

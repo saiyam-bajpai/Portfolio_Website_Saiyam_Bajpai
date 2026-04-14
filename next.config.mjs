@@ -5,8 +5,8 @@ const nextConfig = {
     unoptimized: true,
   },
   // Set the basePath to match your repository name on GitHub Pages
-  basePath: '/Saiyam_Bajpai_Portfolio',
-  assetPrefix: '/Saiyam_Bajpai_Portfolio/',
+  basePath: '/Portfolio_Website_Saiyam_Bajpai',
+  assetPrefix: '/Portfolio_Website_Saiyam_Bajpai/',
 };
 
 export default nextConfig;

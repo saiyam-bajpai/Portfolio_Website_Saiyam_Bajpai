@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, FileText } from "lucide-react";
+import Link from "next/link";
 
 // Inline Aceternity Spotlight
 const Spotlight = ({ className = "" }: { className?: string }) => {
@@ -148,7 +149,7 @@ export default function Hero() {
             </a>
 
             {/* CTA 2: Ghost Amber */}
-            <a 
+            <Link 
               href="/resume" 
               className="group relative inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold transition-all duration-300 rounded-xl border border-[#E8823A]/50 text-[#E8823A] hover:bg-[#E8823A]/10 overflow-hidden"
             >
@@ -168,7 +169,7 @@ export default function Hero() {
                   >
                     <ArrowRight className="w-4 h-4 ml-1" />
                   </motion.div>
-
+ 
                   <motion.div
                     className="absolute inset-0 flex items-center justify-center"
                     initial={{ y: 20, opacity: 0 }}
@@ -179,7 +180,7 @@ export default function Hero() {
                   </motion.div>
                 </div>
               </span>
-            </a>
+            </Link>
           </div>
         </motion.div>
 

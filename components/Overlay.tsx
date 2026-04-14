@@ -8,9 +8,9 @@ interface OverlayProps {
 }
 
 const Letter = ({ char, index, total, scrollYProgress }: { char: string; index: number; total: number; scrollYProgress: MotionValue<number> }) => {
-  const start = (index / total) * 0.08;
-  const end = start + 0.02;
-  const letterOp = useTransform(scrollYProgress, [start, end, 0.08, 0.18], [0, 1, 1, 0]);
+  const start = (index / total) * 0.15;
+  const end = start + 0.05;
+  const letterOp = useTransform(scrollYProgress, [start, end, 0.25, 0.35], [0, 1, 1, 0]);
   
   return (
     <motion.span style={{ opacity: letterOp }}>
@@ -24,10 +24,10 @@ export default function Overlay({ scrollYProgress: externalProgress }: OverlayPr
   const fallback = useMotionValue(0);
   const scrollYProgress = externalProgress ?? fallback;
 
-  // Section 1: "Saiyam Bajpai." (0% - 18%)
+  // Section 1: "Saiyam Bajpai." (0% - 35%)
   const s1Text = "Saiyam Bajpai.";
-  const s1Opacity = useTransform(scrollYProgress, [0, 0.08, 0.18], [0, 1, 0]);
-  const s1Y = useTransform(scrollYProgress, [0, 0.18], [0, -50]); // slight upward float
+  const s1Opacity = useTransform(scrollYProgress, [0, 0.2, 0.35], [1, 1, 0]);
+  const s1Y = useTransform(scrollYProgress, [0, 0.35], [0, -50]); 
 
   // Section 2: "Building things that actually work." (25% - 45%)
   const s2Opacity = useTransform(scrollYProgress, [0.2, 0.25, 0.35, 0.45], [0, 1, 1, 0]);

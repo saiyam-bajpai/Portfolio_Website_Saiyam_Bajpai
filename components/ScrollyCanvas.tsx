@@ -14,7 +14,7 @@ interface OverlayChildProps {
 export default function ScrollyCanvas({ children }: ScrollyCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [images, setImages] = useState<HTMLImageElement[]>([]);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const { scrollYProgress } = useScroll({
@@ -26,57 +26,56 @@ export default function ScrollyCanvas({ children }: ScrollyCanvasProps) {
 
   // Preload images
   useEffect(() => {
-    let loadedCount = 0;
     const totalFrames = 144;
+    let loadedCount = 0;
     const imgArray: HTMLImageElement[] = [];
 
-    const basePath = process.env.__NEXT_ROUTER_BASEPATH || "";
+    // Use the explicit repository name for GitHub Pages basePath robustness
+    const basePath = "/Portfolio_Website_Saiyam_Bajpai";
 
-    const loadImages = async () => {
-      for (let i = 0; i < totalFrames; i++) {
-        const img = new window.Image();
-        const frameNumber = String(i).padStart(3, "0");
-        img.src = `${basePath}/ezgif-split/frame_${frameNumber}_delay-0.056s.webp`;
+    for (let i = 0; i < totalFrames; i++) {
+      const img = new window.Image();
+      const frameNumber = String(i).padStart(3, "0");
+      img.src = `${basePath}/ezgif-split/frame_${frameNumber}_delay-0.056s.webp`;
 
-        img.onload = () => {
-          loadedCount++;
-          if (loadedCount === totalFrames) {
-            setIsLoaded(true);
-            setImages(imgArray);
-          }
-        };
-        img.onerror = () => {
-          // Count error as loaded to avoid infinite loading
-          loadedCount++;
-          if (loadedCount === totalFrames) {
-            setIsLoaded(true);
-            setImages(imgArray);
-          }
-        };
-        imgArray.push(img);
-      }
-    };
-    loadImages();
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount === totalFrames) {
+          imagesRef.current = imgArray;
+          setIsLoaded(true);
+          // Draw first frame immediately
+          setTimeout(() => drawImage(0), 10);
+        }
+      };
+      img.onerror = () => {
+        loadedCount++;
+        if (loadedCount === totalFrames) {
+          imagesRef.current = imgArray;
+          setIsLoaded(true);
+        }
+      };
+      imgArray.push(img);
+    }
   }, []);
 
   // Drawing logic
   const drawImage = (index: number) => {
-    if (!canvasRef.current || images.length === 0 || !images[index]) return;
-    
     const canvas = canvasRef.current;
+    if (!canvas || !imagesRef.current[index]) return;
+    
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const img = images[index];
-    if (!img.naturalWidth) return; // Not yet loaded
+    const img = imagesRef.current[index];
+    if (!img.complete || img.naturalWidth === 0) return;
+
     const canvasW = canvas.width;
     const canvasH = canvas.height;
     
-    // Fill background to blend #08080F
+    ctx.clearRect(0, 0, canvasW, canvasH);
     ctx.fillStyle = "#08080F";
     ctx.fillRect(0, 0, canvasW, canvasH);
 
-    // object-fit: cover calc
     const scale = Math.max(canvasW / img.width, canvasH / img.height);
     const renderW = img.width * scale;
     const renderH = img.height * scale;
@@ -104,11 +103,10 @@ export default function ScrollyCanvas({ children }: ScrollyCanvasProps) {
         }
       }
     };
-    handleResize(); // init
+    handleResize(); 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoaded, images]);
+  }, [isLoaded]);
 
   return (
     <div ref={containerRef} className="relative h-[500vh] bg-[#08080F]">

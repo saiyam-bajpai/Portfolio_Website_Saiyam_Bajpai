@@ -58,6 +58,8 @@ export default function ScrollyCanvas({ children }: ScrollyCanvasProps) {
     }
   }, []);
 
+  const lastDrawnIndex = useRef<number>(-1);
+
   // Drawing logic
   const drawImage = (index: number) => {
     const canvas = canvasRef.current;
@@ -67,27 +69,34 @@ export default function ScrollyCanvas({ children }: ScrollyCanvasProps) {
     if (!ctx) return;
 
     const img = imagesRef.current[index];
-    if (!img.complete || img.naturalWidth === 0) return;
+    // Check if image is truly ready to draw
+    if (!img.complete || img.naturalWidth === 0) {
+      return; // Skip if not ready, but don't clear the last drawing yet
+    }
 
+    // Only redraw if it's a new index OR the canvas was cleared
+    // Actually, always draw to ensure transparency/scaling is updated, but don't CLEAR unless we have a replacement
+    
     const canvasW = canvas.width;
     const canvasH = canvas.height;
-    
-    ctx.clearRect(0, 0, canvasW, canvasH);
+
+    // Drawing
     ctx.fillStyle = "#08080F";
     ctx.fillRect(0, 0, canvasW, canvasH);
 
-    const scale = Math.max(canvasW / img.width, canvasH / img.height);
-    const renderW = img.width * scale;
-    const renderH = img.height * scale;
+    const scale = Math.max(canvasW / img.naturalWidth, canvasH / img.naturalHeight);
+    const renderW = img.naturalWidth * scale;
+    const renderH = img.naturalHeight * scale;
     const offsetX = (canvasW - renderW) / 2;
     const offsetY = (canvasH - renderH) / 2;
 
     ctx.drawImage(img, offsetX, offsetY, renderW, renderH);
+    lastDrawnIndex.current = index;
   };
 
   useMotionValueEvent(currentFrame, "change", (latest) => {
+    const index = Math.round(latest);
     if (isLoaded) {
-      const index = Math.round(latest);
       requestAnimationFrame(() => drawImage(Math.min(index, 143)));
     }
   });
@@ -96,8 +105,11 @@ export default function ScrollyCanvas({ children }: ScrollyCanvasProps) {
   useEffect(() => {
     const handleResize = () => {
       if (canvasRef.current) {
-        canvasRef.current.width = window.innerWidth;
-        canvasRef.current.height = window.innerHeight;
+        canvasRef.current.width = window.innerWidth * window.devicePixelRatio;
+        canvasRef.current.height = window.innerHeight * window.devicePixelRatio;
+        canvasRef.current.style.width = `${window.innerWidth}px`;
+        canvasRef.current.style.height = `${window.innerHeight}px`;
+        
         if (isLoaded) {
           drawImage(Math.round(currentFrame.get()));
         }

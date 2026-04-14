@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="bg-[#08080F] min-h-screen text-gray-200 selection:bg-[#5B8DEF]/30 selection:text-white overflow-x-hidden">
+    <main className="bg-[#08080F] min-h-screen text-gray-200 selection:bg-[#5B8DEF]/30 selection:text-white">
 
       <Hero />
 

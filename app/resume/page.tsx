@@ -9,10 +9,10 @@ import ResumeView from "@/components/ResumeView";
 export default function ResumePage() {
   return (
     <div className="min-h-screen bg-[#08080F] text-gray-200 selection:bg-[#5B8DEF]/30 selection:text-white pb-24 font-sans">
-      <div className="max-w-4xl mx-auto px-6 pt-28 md:pt-36 print:max-w-none print:px-0 print:pt-0">
+      <div className="max-w-4xl mx-auto px-6 pt-32 md:pt-44 print:max-w-none print:px-0 print:pt-0">
         
         {/* Top Control Bar (Hidden on print) */}
-        <div className="flex justify-between items-center mb-10 print:hidden">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-y-6 mb-12 print:hidden">
           <Link
             href="/"
             className="group flex items-center text-sm font-medium text-gray-400 hover:text-white transition-colors"
@@ -28,11 +28,11 @@ export default function ResumePage() {
           </Link>
           
           <a
-            href="/Portfolio_Website_Saiyam_Bajpai/SAIYAM_BAJPAI_RESUME.pdf"
-            download
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#5B8DEF] to-[#4A7BD9] text-white text-sm font-semibold hover:shadow-[0_0_15px_rgba(91,141,239,0.4)] transition-all duration-300"
+            href="../SAIYAM_BAJPAI_RESUME.pdf"
+            download="SAIYAM_BAJPAI_RESUME.pdf"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#5B8DEF] to-[#4A7BD9] text-white text-sm font-semibold hover:shadow-[0_0_20px_rgba(91,141,239,0.5)] transition-all duration-300 relative z-10"
           >
-            <Download size={16} />
+            <Download size={18} />
             Download PDF
           </a>
         </div>
@@ -42,7 +42,7 @@ export default function ResumePage() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
-          className="print:mt-0"
+          className="print:mt-0 relative z-0"
         >
           <ResumeView />
         </motion.div>

@@ -7,11 +7,9 @@ import { ArrowLeft, Download } from "lucide-react";
 import ResumeView from "@/components/ResumeView";
 
 export default function ResumePage() {
-  const basePath = process.env.__NEXT_ROUTER_BASEPATH || "";
-
   return (
     <div className="min-h-screen bg-[#08080F] text-gray-200 selection:bg-[#5B8DEF]/30 selection:text-white pb-24 font-sans">
-      <div className="max-w-4xl mx-auto px-6 pt-12 print:max-w-none print:px-0 print:pt-0">
+      <div className="max-w-4xl mx-auto px-6 pt-28 md:pt-36 print:max-w-none print:px-0 print:pt-0">
         
         {/* Top Control Bar (Hidden on print) */}
         <div className="flex justify-between items-center mb-10 print:hidden">
@@ -30,7 +28,7 @@ export default function ResumePage() {
           </Link>
           
           <a
-            href={`${basePath}/SAIYAM_BAJPAI_RESUME.pdf`}
+            href="/Portfolio_Website_Saiyam_Bajpai/SAIYAM_BAJPAI_RESUME.pdf"
             download
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#5B8DEF] to-[#4A7BD9] text-white text-sm font-semibold hover:shadow-[0_0_15px_rgba(91,141,239,0.4)] transition-all duration-300"
           >

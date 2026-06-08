@@ -1,5 +1,5 @@
 "use client";
-
+import img from "../public/Portrait.png";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, FileText } from "lucide-react";
@@ -211,7 +211,7 @@ export default function Hero() {
               className="w-full h-full object-cover"
               onError={(e) => {
                 // simple fallback if image isn't dropped yet
-                (e.currentTarget as HTMLImageElement).src = `https://placehold.co/800x1000/1a1a24/F0F0F5?text=Place+portrait.jpg+in+public`;
+                (e.currentTarget as HTMLImageElement).src = `${basePath}/Portrait.png`;
               }}
             />
 
